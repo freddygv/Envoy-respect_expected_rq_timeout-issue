@@ -1,0 +1,23 @@
+version: '3'
+services:
+  client:
+    build: ./client
+
+  client-proxy:
+    build: ./client-proxy
+    ports:
+      - '8001:8001'
+    volumes:
+      - ./client-proxy/envoy.yaml:/etc/envoy.yaml
+  server:
+    image: nicholasjackson/fake-service:v0.18.1
+    environment:
+      LISTEN_ADDR: 0.0.0.0:8080
+      TIMING_50_PERCENTILE: 30s
+
+  server-proxy:
+    build: ./server-proxy
+    ports:
+      - '8002:8001'
+    volumes:
+      - ./server-proxy/envoy.yaml:/etc/envoy.yaml
