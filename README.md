@@ -11,7 +11,7 @@ Setup:
 ### Verifying the setup
 
 1. Run `docker-compose up`
-2. Run `time docker exec -it attempt-2_client_1 curl client-proxy:9001/test`
+2. Run `time docker exec -it envoy-respect_expected_rq_timeout-issue_client_1 curl client-proxy:9001/test`
 
 
 #### Observations:
@@ -25,7 +25,7 @@ Tested on versions going back to v1.14.1
 
 ### Second test
 1. Run `docker-compose up`
-2. Run `time docker exec -it attempt-2_client_1 curl -vH 'x-envoy-upstream-rq-timeout-ms: 10' client-proxy:9001/test`
+2. Run `time docker exec -it envoy-respect_expected_rq_timeout-issue_client_1 curl -vH 'x-envoy-upstream-rq-timeout-ms: 10' client-proxy:9001/test`
 
 #### Observations:
 1. The request should time out in < 1s
